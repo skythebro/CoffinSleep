@@ -28,7 +28,7 @@
     </Reference>
 
     <Reference Include="ProjectM.Gameplay.Systems">
-      <HintPath>$(UnhollowedDllPath)\unhollowed\ProjectM.Gameplay.Systems.dll</HintPath>
+      <HintPath>$(UnhollowedDllPath)\ProjectM.Gameplay.Systems.dll</HintPath>
     </Reference>
 
     <Reference Include="ProjectM">
