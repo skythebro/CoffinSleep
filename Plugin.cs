@@ -19,33 +19,13 @@ public class Plugin : BasePlugin {
         Log.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} v{PluginInfo.PLUGIN_VERSION} is loaded!");
 
         harmony.PatchAll();
+
     }
 
     public override bool Unload() {
         harmony.UnpatchSelf();
-
         Log.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} v{PluginInfo.PLUGIN_VERSION} is unloaded!");
+
         return true;
-    }
-
-    [HarmonyPatch(typeof(SleepInsideSystem), "OnUpdate")]
-    public static class SleepInsideSystemOnUpdatePatch {
-        private static void Prefix(SleepInsideSystem __instance) {
-            try {
-                if (RotationCycle.DayNightCycle.CurrentTimeOfDay(__instance.EntityManager) != TimeOfDay.Day) {
-                    return;
-                }
-
-                if (!Character.Player.IsAllSleeping(__instance.EntityManager)) {
-                    return;
-                }
-
-                var increasedMinutes = 1;
-                RotationCycle.Time.Increase(__instance.EntityManager, increasedMinutes);
-                Servant.Station.IncreaseProgress(__instance.EntityManager, increasedMinutes);
-            } catch (Exception e) {
-                Logger.LogError(e);
-            }
-        }
     }
 }
