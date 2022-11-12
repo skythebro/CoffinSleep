@@ -10,6 +10,15 @@
     <UnhollowedDllPath>C:\Users\caio_\AppData\Roaming\Thunderstore Mod Manager\DataFolder\VRising\profiles\Develop\BepInEx\unhollowed</UnhollowedDllPath>
   </PropertyGroup>
 
+  <Target Name="CopyDLLs" AfterTargets="Build">
+    <Message Text="Executing CopyDLLs task" Importance="High" />
+
+    <!-- <Copy SourceFiles="$(TargetDir)$(ProjectName).dll" DestinationFolder="C:\Users\caio_\AppData\Roaming\Thunderstore Mod Manager\DataFolder\VRising\profiles\Develop\BepInEx\WetstonePlugins\" /> -->
+    <Copy SourceFiles="$(TargetDir)$(ProjectName).dll" DestinationFolder="C:\Users\caio_\AppData\Roaming\Thunderstore Mod Manager\DataFolder\VRising\profiles\Develop\BepInEx\plugins\" />
+
+    <Message Text="Copied build files" Importance="High" />
+  </Target>
+
   <ItemGroup>
     <PackageReference Include="BepInEx.IL2CPP" Version="6.0.0-*" IncludeAssets="compile" />
     <PackageReference Include="BepInEx.PluginInfoProps" Version="1.*" />
@@ -22,17 +31,21 @@
     <Reference Include="Il2CppSystem">
         <HintPath>$(UnhollowedDllPath)\Il2CppSystem.dll</HintPath>
     </Reference>
-    
-    <Reference Include="ProjectM.Shared">
-        <HintPath>$(UnhollowedDllPath)\ProjectM.Shared.dll</HintPath>
+
+    <Reference Include="ProjectM">
+        <HintPath>$(UnhollowedDllPath)\ProjectM.dll</HintPath>
     </Reference>
 
     <Reference Include="ProjectM.Gameplay.Systems">
       <HintPath>$(UnhollowedDllPath)\ProjectM.Gameplay.Systems.dll</HintPath>
     </Reference>
 
-    <Reference Include="ProjectM">
-        <HintPath>$(UnhollowedDllPath)\ProjectM.dll</HintPath>
+    <Reference Include="ProjectM.Shared">
+        <HintPath>$(UnhollowedDllPath)\ProjectM.Shared.dll</HintPath>
+    </Reference>
+
+    <Reference Include="ProjectM.CodeGeneration">
+      <HintPath>$(UnhollowedDllPath)\ProjectM.CodeGeneration.dll</HintPath>
     </Reference>
 
     <Reference Include="Unity.Collections">

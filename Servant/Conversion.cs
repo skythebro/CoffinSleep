@@ -1,9 +1,10 @@
-using ProjectM;
 using Unity.Entities;
+using ProjectM;
 
 namespace Servant;
 
 public static class Convertion {
+    // IncreaseProgress of servant convertion.
     public static void IncreaseProgress(EntityManager em, int minutes) {
         var coffinEntities = Station.GetEntities(em);
 

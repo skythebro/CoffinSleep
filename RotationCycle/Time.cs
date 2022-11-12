@@ -1,10 +1,11 @@
 using Unity.Entities;
 using ProjectM.Network;
 
-namespace DayNightCycle;
+namespace RotationCycle;
 
-public static class Helper {
-    public static void IncreaseDayTime(EntityManager em, int minutes) {
+public static class Time {
+    // Increase the rotation cycle time
+    public static void Increase(EntityManager em, int minutes) {
         var setTimeEntity = em.CreateEntity(
             ComponentType.ReadOnly<SetTimeOfDayEvent>()
         );
