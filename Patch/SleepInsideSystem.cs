@@ -1,7 +1,7 @@
 using HarmonyLib;
 using System;
 using ProjectM;
-using CoffinSleep;
+using Config;
 
 namespace Patch;
 
@@ -11,20 +11,36 @@ public class SleepInsideSystemPatch {
     public static class OnUpdate {
         private static void Prefix(SleepInsideSystem __instance) {
             try {
-                if (RotationCycle.DayNightCycle.CurrentTimeOfDay(__instance.EntityManager) != TimeOfDay.Day) {
-                    return;
+                if (Env.OnlyDayTimeSleep.Value) {
+                    if (RotationCycle.DayNightCycle.CurrentTimeOfDay(__instance.EntityManager) != TimeOfDay.Day) {
+                        return;
+                    }
                 }
 
-                if (!Character.Player.IsAllSleeping(__instance.EntityManager)) {
-                    return;
+                if (Env.OnlyAllPlayersSleeping.Value) {
+                    if (!Character.Player.IsAllSleeping(__instance.EntityManager)) {
+                        return;
+                    }
                 }
 
-                var increasedMinutes = 1;
+                var increasedMinutes = Env.IncreasedTime.Value;
+
                 RotationCycle.Time.Increase(__instance.EntityManager, increasedMinutes);
-                Servant.Station.IncreaseProgress(__instance.EntityManager, increasedMinutes);
+
+                if (Env.ServantConvertionSpeeds.Value) {
+                    Servant.Convertion.IncreaseProgress(__instance.EntityManager, increasedMinutes);
+                }
+
+                if (Env.ServantMissionSpeeds.Value) {
+                    Servant.Mission.IncreaseProgress(__instance.EntityManager, increasedMinutes);
+                }
+
+                if (Env.ServantInjurySpeeds.Value) {
+                    Servant.Injury.IncreaseProgress(__instance.EntityManager, increasedMinutes);
+                }
+
             } catch (Exception e) {
-                Console.WriteLine(e);
-                Plugin.Logger.LogError(e);
+                Log.Error(e);
             }
         }
     }

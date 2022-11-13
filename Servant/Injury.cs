@@ -13,6 +13,9 @@ public static class Injury {
 
             if (coffinStation.State == ServantCoffinState.Converting) {
                 coffinStation.RecuperateEndTime -= minutes;
+                if (coffinStation.RecuperateEndTime <= 0) {
+                    coffinStation.RecuperateEndTime = 0;
+                }
                 em.SetComponentData<ServantCoffinstation>(coffinEntity, coffinStation);
             }
         }

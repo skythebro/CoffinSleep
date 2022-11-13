@@ -23,6 +23,9 @@ public static class Mission {
             for (int i = 0; i < missionBuffer.Length; i++) {
                 var mission = missionBuffer[i];
                 mission.MissionLength -= minutes;
+                if (mission.MissionLength <= 0) {
+                    mission.MissionLength = 0;
+                }
                 missionBuffer[i] = mission;
             }
         }

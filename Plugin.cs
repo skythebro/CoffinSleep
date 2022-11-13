@@ -1,9 +1,8 @@
-﻿using System;
-using BepInEx;
+﻿using BepInEx;
 using BepInEx.IL2CPP;
-using BepInEx.Logging;
 using HarmonyLib;
-using ProjectM;
+using Config;
+using Wetstone.API;
 
 namespace CoffinSleep;
 
@@ -11,21 +10,32 @@ namespace CoffinSleep;
 [BepInDependency("xyz.molenzwiebel.wetstone")]
 // [Wetstone.API.Reloadable]
 public class Plugin : BasePlugin {
-    public static ManualLogSource Logger;
-    public static Harmony harmony = new Harmony(PluginInfo.PLUGIN_GUID);
+    public static Harmony harmony;
 
     public override void Load() {
-        Logger = this.Log;
-        Log.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} v{PluginInfo.PLUGIN_VERSION} is loaded!");
+        global::Config.Log.Logger = this.Log;
+        global::Config.Env.Config = this.Config;
 
-        harmony.PatchAll();
+        global::Config.Env.Load();
+        global::Config.Log.Load();
 
+        if (VWorld.IsServer) {
+            harmony = new Harmony(PluginInfo.PLUGIN_GUID);
+
+            harmony.PatchAll();
+
+            global::Config.Log.Info($"Plugin {PluginInfo.PLUGIN_GUID} v{PluginInfo.PLUGIN_VERSION} server site is loaded!");
+        }
+
+        if (VWorld.IsClient) {
+            global::Config.Log.Info($"Plugin {PluginInfo.PLUGIN_GUID} v{PluginInfo.PLUGIN_VERSION} client side is loaded!");
+        }
     }
 
     public override bool Unload() {
         harmony.UnpatchSelf();
-        Log.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} v{PluginInfo.PLUGIN_VERSION} is unloaded!");
 
+        global::Config.Log.Info($"Plugin {PluginInfo.PLUGIN_GUID} v{PluginInfo.PLUGIN_VERSION} is unloaded!");
         return true;
     }
 }

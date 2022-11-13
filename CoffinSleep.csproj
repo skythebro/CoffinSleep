@@ -12,11 +12,8 @@
 
   <Target Name="CopyDLLs" AfterTargets="Build">
     <Message Text="Executing CopyDLLs task" Importance="High" />
-
     <!-- <Copy SourceFiles="$(TargetDir)$(ProjectName).dll" DestinationFolder="C:\Users\caio_\AppData\Roaming\Thunderstore Mod Manager\DataFolder\VRising\profiles\Develop\BepInEx\WetstonePlugins\" /> -->
     <Copy SourceFiles="$(TargetDir)$(ProjectName).dll" DestinationFolder="C:\Users\caio_\AppData\Roaming\Thunderstore Mod Manager\DataFolder\VRising\profiles\Develop\BepInEx\plugins\" />
-
-    <Message Text="Copied build files" Importance="High" />
   </Target>
 
   <ItemGroup>
