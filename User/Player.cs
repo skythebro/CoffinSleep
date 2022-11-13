@@ -2,7 +2,7 @@ using Unity.Entities;
 using Unity.Collections;
 using ProjectM;
 
-namespace Character;
+namespace User;
 
 public static class Player {
     // GetEntities of component type PlayerCharacter

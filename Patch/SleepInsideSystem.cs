@@ -12,6 +12,7 @@ public class SleepInsideSystemPatch {
     [HarmonyPatch(typeof(SleepInsideSystem), "OnUpdate")]
     public static class OnUpdate {
         private static void Prefix(SleepInsideSystem __instance) {
+            Log.Debug("Running patch");
             try {
                 if (Env.OnlyDayTimeSleep.Value) {
                     if (RotationCycle.DayNightCycle.CurrentTimeOfDay(__instance.EntityManager) != TimeOfDay.Day) {
@@ -19,8 +20,12 @@ public class SleepInsideSystemPatch {
                     }
                 }
 
+                if (User.Info.IsAllOffline(__instance.EntityManager)) {
+                    return;
+                }
+
                 if (Env.OnlyAllPlayersSleeping.Value) {
-                    if (!Character.Player.IsAllSleeping(__instance.EntityManager)) {
+                    if (!User.Player.IsAllSleeping(__instance.EntityManager)) {
                         return;
                     }
                 }
