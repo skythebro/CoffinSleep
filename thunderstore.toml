@@ -4,7 +4,7 @@ schemaVersion = "0.0.1"
 [package]
 namespace = "caioreix"
 name = "CoffinSleep"
-versionNumber = "1.0.0"
+versionNumber = "1.1.0"
 description = "A VRising mod that speeds up time while you sleep in your coffin."
 websiteUrl = "https://github.com/caioreix/CoffinSleep"
 containsNsfwContent = false
