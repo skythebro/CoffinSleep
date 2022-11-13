@@ -9,38 +9,48 @@ public class Log {
     public static ManualLogSource Logger;
     private static string TempLogFile;
 
-    public static void Load() {
+    // Load the logs start configs.
+    public static void Load(string worldType) {
         if (Env.LogOnTempFile.Value) {
-            TempLogFile = $"{System.IO.Path.GetTempPath()}{Guid.NewGuid().ToString()}-{CoffinSleep.PluginInfo.PLUGIN_GUID}.log";
-            Message($"Using \"{TempLogFile}\" to save logs.");
+            TempLogFile = $"{System.IO.Path.GetTempPath()}{CoffinSleep.PluginInfo.PLUGIN_GUID}-{worldType}-{Guid.NewGuid().ToString()}.log";
+            Env.LastServerLogTempFilePath.Value = TempLogFile;
+            Env.Config.Save();
+
+            Info($"Using \"{TempLogFile}\" to save logs.");
         }
     }
 
+    // Info logs
     public static void Info(object data) {
         Logger.LogInfo(data);
         logOnFile(data, "Info   ");
     }
 
+    // Error logs
     public static void Error(object data) {
         Logger.LogError(data);
         logOnFile(data, "Error  ");
     }
 
+    // Debug logs
     public static void Debug(object data) {
         Logger.LogDebug(data);
         logOnFile(data, "Debug  ");
     }
 
+    // Fatal logs
     public static void Fatal(object data) {
         Logger.LogFatal(data);
         logOnFile(data, "Fatal  ");
     }
 
+    // Warning logs
     public static void Warning(object data) {
         Logger.LogWarning(data);
         logOnFile(data, "Warning");
     }
 
+    // Message logs
     public static void Message(object data) {
         Logger.LogMessage(data);
         logOnFile(data, "Message");

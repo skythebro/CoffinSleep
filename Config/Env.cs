@@ -11,7 +11,9 @@ public class Env {
     public static ConfigEntry<bool> ServantInjurySpeeds;
     public static ConfigEntry<bool> ServantMissionSpeeds;
     public static ConfigEntry<bool> LogOnTempFile;
+    public static ConfigEntry<string> LastServerLogTempFilePath;
 
+    // Load the plugin config variables.
     public static void Load() {
         IncreasedTime = Config.Bind(
             "CoffinSleep",
@@ -60,6 +62,13 @@ public class Env {
             "LogOnTempFile",
             false,
             "Enabled, will log every plugin log on a temp file"
+        );
+
+        LastServerLogTempFilePath = Config.Bind(
+            "Debug",
+            "LastServerLogTempFilePath",
+            "",
+            "Just to get the file path more easily"
         );
     }
 }

@@ -6,6 +6,8 @@ using Config;
 namespace Patch;
 
 [HarmonyPatch]
+
+// SleepInsideSystemPatch Called when the player is inside of the coffin.
 public class SleepInsideSystemPatch {
     [HarmonyPatch(typeof(SleepInsideSystem), "OnUpdate")]
     public static class OnUpdate {

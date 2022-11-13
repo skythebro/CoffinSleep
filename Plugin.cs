@@ -16,8 +16,10 @@ public class Plugin : BasePlugin {
         global::Config.Log.Logger = this.Log;
         global::Config.Env.Config = this.Config;
 
+        var wType = getWorldType();
+
         global::Config.Env.Load();
-        global::Config.Log.Load();
+        global::Config.Log.Load(wType);
 
         if (VWorld.IsServer) {
             harmony = new Harmony(PluginInfo.PLUGIN_GUID);
@@ -37,5 +39,16 @@ public class Plugin : BasePlugin {
 
         global::Config.Log.Info($"Plugin {PluginInfo.PLUGIN_GUID} v{PluginInfo.PLUGIN_VERSION} is unloaded!");
         return true;
+    }
+
+    private static string getWorldType() {
+        if (VWorld.IsClient) {
+            return "Client";
+        }
+        if (VWorld.IsServer) {
+            return "Server";
+        }
+
+        return "Untyped";
     }
 }
