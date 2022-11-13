@@ -13,7 +13,7 @@
   <Import Project="Config.xml" />
 
   <Target Name="CopyDLLs" AfterTargets="Build">
-    <Message Text="Executing CopyDLLs task" Importance="High" />
+    <Message Text="Copy build DLLs -> $(BuildDestinationFolder)" Importance="High" />
     <Copy SourceFiles="$(TargetDir)$(ProjectName).dll" DestinationFolder="$(BuildDestinationFolder)" />
     <Copy SourceFiles="$(TargetDir)$(ProjectName).dll" DestinationFolder="./dist" />
   </Target>
