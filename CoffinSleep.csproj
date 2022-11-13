@@ -7,13 +7,14 @@
     <Version>1.0.0</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
-    <UnhollowedDllPath>C:\Users\caio_\AppData\Roaming\Thunderstore Mod Manager\DataFolder\VRising\profiles\Develop\BepInEx\unhollowed</UnhollowedDllPath>
+    <UnhollowedDllPath></UnhollowedDllPath>
   </PropertyGroup>
+
+  <Import Project="Config.xml" />
 
   <Target Name="CopyDLLs" AfterTargets="Build">
     <Message Text="Executing CopyDLLs task" Importance="High" />
-    <!-- <Copy SourceFiles="$(TargetDir)$(ProjectName).dll" DestinationFolder="C:\Users\caio_\AppData\Roaming\Thunderstore Mod Manager\DataFolder\VRising\profiles\Develop\BepInEx\WetstonePlugins\" /> -->
-    <Copy SourceFiles="$(TargetDir)$(ProjectName).dll" DestinationFolder="C:\Users\caio_\AppData\Roaming\Thunderstore Mod Manager\DataFolder\VRising\profiles\Develop\BepInEx\plugins\" />
+    <Copy SourceFiles="$(TargetDir)$(ProjectName).dll" DestinationFolder="$(BuildDestinationFolder)" />
   </Target>
 
   <ItemGroup>
