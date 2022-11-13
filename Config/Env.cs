@@ -11,7 +11,7 @@ public class Env {
     public static ConfigEntry<bool> ServantInjurySpeeds;
     public static ConfigEntry<bool> ServantMissionSpeeds;
     public static ConfigEntry<bool> LogOnTempFile;
-    public static ConfigEntry<string> LastServerLogTempFilePath;
+    public static ConfigEntry<string> LastLogTempFilePath;
 
     // Load the plugin config variables.
     public static void Load() {
@@ -26,14 +26,14 @@ public class Env {
             "CoffinSleep",
             "OnlyDayTimeSleep",
             true,
-            "Enabled, sleep just passes the time when it's daytime"
+            "Enabled, sleep just speeds the time when it's daytime"
         );
 
         OnlyAllPlayersSleeping = Config.Bind(
             "CoffinSleep",
             "OnlyAllPlayersSleeping",
             true,
-            "Enabled, sleep just passes the time if all player of the server are sleeping"
+            "Enabled, sleep just speeds the time if all players of the server are sleeping"
         );
 
         ServantConvertionSpeeds = Config.Bind(
@@ -64,9 +64,9 @@ public class Env {
             "Enabled, will log every plugin log on a temp file"
         );
 
-        LastServerLogTempFilePath = Config.Bind(
+        LastLogTempFilePath = Config.Bind(
             "Debug",
-            "LastServerLogTempFilePath",
+            "LastLogTempFilePath",
             "",
             "Just to get the file path more easily"
         );

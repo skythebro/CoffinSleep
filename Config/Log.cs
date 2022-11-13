@@ -13,7 +13,7 @@ public class Log {
     public static void Load(string worldType) {
         if (Env.LogOnTempFile.Value) {
             TempLogFile = $"{System.IO.Path.GetTempPath()}{CoffinSleep.PluginInfo.PLUGIN_GUID}-{worldType}-{Guid.NewGuid().ToString()}.log";
-            Env.LastServerLogTempFilePath.Value = TempLogFile;
+            Env.LastLogTempFilePath.Value = TempLogFile;
             Env.Config.Save();
 
             Info($"Using \"{TempLogFile}\" to save logs.");
