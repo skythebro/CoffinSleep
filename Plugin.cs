@@ -1,54 +1,60 @@
 ﻿using BepInEx;
+using BepInEx.Logging;
+using BepInEx.Configuration;
 using BepInEx.IL2CPP;
 using HarmonyLib;
-using Config;
 using Wetstone.API;
-
+using Logger;
 namespace CoffinSleep;
 
 [BepInPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
 [BepInDependency("xyz.molenzwiebel.wetstone")]
 // [Wetstone.API.Reloadable]
 public class Plugin : BasePlugin {
-    public static Harmony harmony;
-
     public override void Load() {
-        global::Config.Log.Logger = this.Log;
-        global::Config.Env.Config = this.Config;
-
-        var wType = getWorldType();
-
-        global::Config.Env.Load();
-        global::Config.Log.Load(wType);
-
-        if (VWorld.IsServer) {
-            harmony = new Harmony(PluginInfo.PLUGIN_GUID);
-
-            harmony.PatchAll();
-
-            global::Config.Log.Info($"Plugin {PluginInfo.PLUGIN_GUID} v{PluginInfo.PLUGIN_VERSION} server site is loaded!");
-        }
-
-        if (VWorld.IsClient) {
-            global::Config.Log.Info($"Plugin {PluginInfo.PLUGIN_GUID} v{PluginInfo.PLUGIN_VERSION} client side is loaded!");
-        }
+        if (VWorld.IsServer) Server.Load(this.Config, this.Log);
+        if (VWorld.IsClient) Client.Load(this.Config, this.Log);
     }
 
     public override bool Unload() {
-        harmony.UnpatchSelf();
+        if (VWorld.IsServer) Server.Unload();
+        if (VWorld.IsClient) Client.Unload();
 
-        global::Config.Log.Info($"Plugin {PluginInfo.PLUGIN_GUID} v{PluginInfo.PLUGIN_VERSION} is unloaded!");
-        return true;
+        return false;
+    }
+}
+
+public static class Server {
+    public static Harmony harmony;
+    internal static void Load(ConfigFile config, ManualLogSource logger) {
+        Settings.Config.Load(config);
+        Logger.Config.Load(logger, "Server", global::Settings.Env.LogOnTempFile.Value, global::Settings.Env.EnableTraceLogs.Value);
+
+        harmony = new Harmony(PluginInfo.PLUGIN_GUID);
+
+        Log.Trace("Patching harmony");
+        harmony.PatchAll();
+
+        Log.Info($"Plugin {PluginInfo.PLUGIN_GUID} v{PluginInfo.PLUGIN_VERSION} server side is loaded!");
     }
 
-    private static string getWorldType() {
-        if (VWorld.IsClient) {
-            return "Client";
-        }
-        if (VWorld.IsServer) {
-            return "Server";
-        }
+    internal static bool Unload() {
+        harmony.UnpatchSelf();
 
-        return "Untyped";
+        Log.Info($"Plugin {PluginInfo.PLUGIN_GUID} v{PluginInfo.PLUGIN_VERSION} server side is unloaded!");
+        return true;
+    }
+}
+
+internal static class Client {
+    internal static void Load(ConfigFile config, ManualLogSource logger) {
+        Settings.Config.Load(config);
+        Logger.Config.Load(logger, "Client", global::Settings.Env.LogOnTempFile.Value, global::Settings.Env.EnableTraceLogs.Value);
+
+        Log.Info($"Plugin {PluginInfo.PLUGIN_GUID} v{PluginInfo.PLUGIN_VERSION} client side is loaded!");
+    }
+
+    internal static void Unload() {
+        Log.Info($"Plugin {PluginInfo.PLUGIN_GUID} v{PluginInfo.PLUGIN_VERSION} client side is unloaded!");
     }
 }

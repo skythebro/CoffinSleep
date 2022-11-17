@@ -1,74 +1,76 @@
 using BepInEx.Configuration;
 
-namespace Config;
+namespace Settings;
 
 public class Env {
-    public static ConfigFile Config;
+    // SERVER
     public static ConfigEntry<int> IncreasedTime;
     public static ConfigEntry<bool> OnlyDayTimeSleep;
     public static ConfigEntry<bool> OnlyAllPlayersSleeping;
     public static ConfigEntry<bool> ServantConvertionSpeeds;
-    public static ConfigEntry<bool> ServantInjurySpeeds;
     public static ConfigEntry<bool> ServantMissionSpeeds;
+
+    // DEBUG
     public static ConfigEntry<bool> LogOnTempFile;
-    public static ConfigEntry<string> LastLogTempFilePath;
+    public static ConfigEntry<bool> EnableTraceLogs;
 
     // Load the plugin config variables.
-    public static void Load() {
-        IncreasedTime = Config.Bind(
-            "CoffinSleep",
+    public static void load() {
+        // Server
+        IncreasedTime = Config.cfg.Bind(
+            "Server",
             "IncreasedTime",
             1,
             "Change the increased time change by frame"
         );
 
-        OnlyDayTimeSleep = Config.Bind(
-            "CoffinSleep",
+        OnlyDayTimeSleep = Config.cfg.Bind(
+            "Server",
             "OnlyDayTimeSleep",
             true,
             "Enabled, sleep just speeds the time when it's daytime"
         );
 
-        OnlyAllPlayersSleeping = Config.Bind(
-            "CoffinSleep",
+        OnlyAllPlayersSleeping = Config.cfg.Bind(
+            "Server",
             "OnlyAllPlayersSleeping",
             true,
             "Enabled, sleep just speeds the time if all players of the server are sleeping"
         );
 
-        ServantConvertionSpeeds = Config.Bind(
-            "CoffinSleep",
+        ServantConvertionSpeeds = Config.cfg.Bind(
+            "Server",
             "ServantConvertionSpeeds",
             true,
             "Enabled, sleep speeds servant convertion progress"
         );
 
-        ServantInjurySpeeds = Config.Bind(
-            "CoffinSleep",
-            "ServantInjurySpeeds",
-            true,
-            "Enabled, sleep speeds servant injury recover progress"
-        );
-
-        ServantMissionSpeeds = Config.Bind(
-            "CoffinSleep",
+        ServantMissionSpeeds = Config.cfg.Bind(
+            "Server",
             "ServantMissionSpeeds",
             true,
             "Enabled, sleep speeds servant mission progress"
         );
 
-        LogOnTempFile = Config.Bind(
-            "Debug",
+        // Ðebug
+        LogOnTempFile = Config.cfg.Bind(
+            "Ðebug",
             "LogOnTempFile",
             false,
             "Enabled, will log every plugin log on a temp file"
         );
 
-        LastLogTempFilePath = Config.Bind(
-            "Debug",
-            "LastLogTempFilePath",
-            "",
-            "Just to get the file path more easily"
+        EnableTraceLogs = Config.cfg.Bind(
+            "Ðebug",
+            "EnableTraceLogs",
+            false,
+            "Enabled, will print Trace logs (Debug output in BepInEx)"
         );
+
+        validateValues();
+    }
+
+    private static void validateValues() {
+        Config.cfg.Save();
     }
 }

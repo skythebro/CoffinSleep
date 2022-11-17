@@ -14,12 +14,28 @@ Coffin Sleep is a VRising mod that speeds up time while you sleep in your coffin
 
 * Just need to enter in your coffin and sleep.
 
+* Actually Features:
+  - Day night cycle speed.
+  - Mission Progress speed.
+  - Servant Conversion speed.
+  - Servant Injuries speed. 
+  - Resources speed (trees, stones, ores, vegetations...)
+  - Bosses respawn speed.
+  - Npc respawn speed.
+  - Chests respawn speed.
+
+* Future possible features:
+  - Blood recover while sleep.
+  - Debuffs recover speed.
+  - Clock UI while sleeping
+  - All creation/refining stations speed.
+
 ## Configuration
 
 Values can be configured at `(VRising client/server folder)/VRising/BepInEx/config/CoffinSleep.cfg`
 
 ```
-[CoffinSleep]
+[Server]
 
 ## Change the increased time change by frame
 # Setting type: Int32
@@ -40,11 +56,6 @@ OnlyAllPlayersSleeping = true
 # Setting type: Boolean
 # Default value: true
 ServantConvertionSpeeds = true
-
-## Enabled, sleep speeds servant injury recover progress
-# Setting type: Boolean
-# Default value: true
-ServantInjurySpeeds = true
 
 ## Enabled, sleep speeds servant mission progress
 # Setting type: Boolean
