@@ -1,10 +1,11 @@
 ﻿using BepInEx;
-using BepInEx.Logging;
 using BepInEx.Configuration;
 using BepInEx.IL2CPP;
+using BepInEx.Logging;
 using HarmonyLib;
+using Utils.Logger;
 using Wetstone.API;
-using Logger;
+
 namespace CoffinSleep;
 
 [BepInPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
@@ -27,8 +28,7 @@ public class Plugin : BasePlugin {
 public static class Server {
     public static Harmony harmony;
     internal static void Load(ConfigFile config, ManualLogSource logger) {
-        Settings.Config.Load(config);
-        Logger.Config.Load(logger, "Server", global::Settings.Env.LogOnTempFile.Value, global::Settings.Env.EnableTraceLogs.Value);
+        Settings.Config.Load(config, logger, "Server");
 
         harmony = new Harmony(PluginInfo.PLUGIN_GUID);
 
@@ -47,14 +47,22 @@ public static class Server {
 }
 
 internal static class Client {
+    public static Harmony harmony;
     internal static void Load(ConfigFile config, ManualLogSource logger) {
-        Settings.Config.Load(config);
-        Logger.Config.Load(logger, "Client", global::Settings.Env.LogOnTempFile.Value, global::Settings.Env.EnableTraceLogs.Value);
+        Settings.Config.Load(config, logger, "Client");
+
+        harmony = new Harmony(PluginInfo.PLUGIN_GUID);
+
+        Log.Trace("Patching harmony");
+        harmony.PatchAll();
 
         Log.Info($"Plugin {PluginInfo.PLUGIN_GUID} v{PluginInfo.PLUGIN_VERSION} client side is loaded!");
     }
 
-    internal static void Unload() {
+    internal static bool Unload() {
+        harmony.UnpatchSelf();
+
         Log.Info($"Plugin {PluginInfo.PLUGIN_GUID} v{PluginInfo.PLUGIN_VERSION} client side is unloaded!");
+        return true;
     }
 }

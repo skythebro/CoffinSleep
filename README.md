@@ -27,8 +27,9 @@ Coffin Sleep is a VRising mod that speeds up time while you sleep in your coffin
 * Future possible features:
   - Blood recover while sleep.
   - Debuffs recover speed.
-  - Clock UI while sleeping
+  - Clock UI while sleeping.
   - All creation/refining stations speed.
+  - Config max consecutive sleeping time.
 
 ## Configuration
 
