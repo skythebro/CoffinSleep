@@ -7,8 +7,10 @@ public class ENV {
     public static ConfigEntry<int> IncreasedTime;
     public static ConfigEntry<bool> OnlyDayTimeSleep;
     public static ConfigEntry<bool> OnlyAllPlayersSleeping;
-    public static ConfigEntry<bool> ServantConvertionSpeeds;
-    public static ConfigEntry<bool> ServantMissionSpeeds;
+    public static ConfigEntry<bool> PauseDuringTransitions;
+    public static ConfigEntry<bool> SleepBloodMoon;
+    public static ConfigEntry<bool> SpeedServantConversions;
+    public static ConfigEntry<bool> SpeedServantMissions;
 
     public class Server {
         private static string serverSection = "🔧Server";
@@ -23,8 +25,8 @@ public class ENV {
             IncreasedTime = Utils.Settings.Config.cfg.Bind(
                 serverSection,
                 nameof(IncreasedTime),
-                1,
-                "Change the increased time change by frame"
+                30,
+                "Change the increased game time in minutes per real time second"
             );
 
             OnlyDayTimeSleep = Utils.Settings.Config.cfg.Bind(
@@ -41,16 +43,30 @@ public class ENV {
                 "Enabled, sleep just speeds the time if all players of the server are sleeping"
             );
 
-            ServantConvertionSpeeds = Utils.Settings.Config.cfg.Bind(
+            PauseDuringTransitions = Utils.Settings.Config.cfg.Bind(
                 serverSection,
-                nameof(ServantConvertionSpeeds),
+                nameof(PauseDuringTransitions),
+                true,
+                "Enabled, will stop time speed during the day and night transitions"
+            );
+
+            SleepBloodMoon = Utils.Settings.Config.cfg.Bind(
+                serverSection,
+                nameof(SleepBloodMoon),
+                false,
+                "Enabled, will stop time speed during blood moon nights"
+            );
+
+            SpeedServantConversions = Utils.Settings.Config.cfg.Bind(
+                serverSection,
+                nameof(SpeedServantConversions),
                 true,
                 "Enabled, sleep speeds servant convertion progress"
             );
 
-            ServantMissionSpeeds = Utils.Settings.Config.cfg.Bind(
+            SpeedServantMissions = Utils.Settings.Config.cfg.Bind(
                 serverSection,
-                nameof(ServantMissionSpeeds),
+                nameof(SpeedServantMissions),
                 true,
                 "Enabled, sleep speeds servant mission progress"
             );
