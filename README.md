@@ -65,7 +65,7 @@ PauseDuringTransitions = true
 # Default value: false
 SleepBloodMoon = false
 
-## Enabled, sleep speeds servant convertion progress
+## Enabled, sleep speeds servant conversion progress
 # Setting type: Boolean
 # Default value: true
 SpeedServantConversions = true

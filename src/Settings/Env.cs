@@ -61,7 +61,7 @@ public class ENV {
                 serverSection,
                 nameof(SpeedServantConversions),
                 true,
-                "Enabled, sleep speeds servant convertion progress"
+                "Enabled, sleep speeds servant conversion progress"
             );
 
             SpeedServantMissions = Utils.Settings.Config.cfg.Bind(
