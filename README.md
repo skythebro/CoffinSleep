@@ -2,6 +2,8 @@
 
 Coffin Sleep is a VRising mod that speeds up time while you sleep in your coffin.
 
+Version 2.0 has less features because gloomrot makes some changes to the dlls, I will add again soon.
+
 ## Instalation (Manual)
 
 * Install [BepInEx](https://docs.bepinex.dev/master/articles/user_guide/installation/index.html)
@@ -40,10 +42,10 @@ Values can be configured at `(VRising client/server folder)/VRising/BepInEx/conf
 ```
 [🔧Server]
 
-## Change the increased game time in minutes per real time second
+## Change the increased game time in hours per real time second
 # Setting type: Int32
-# Default value: 30
-IncreasedTime = 30
+# Default value: 1
+IncreasedTime = 1
 
 ## Enabled, sleep just speeds the time when it's daytime
 # Setting type: Boolean
@@ -64,14 +66,4 @@ PauseDuringTransitions = true
 # Setting type: Boolean
 # Default value: false
 SleepBloodMoon = false
-
-## Enabled, sleep speeds servant conversion progress
-# Setting type: Boolean
-# Default value: true
-SpeedServantConversions = true
-
-## Enabled, sleep speeds servant mission progress
-# Setting type: Boolean
-# Default value: true
-SpeedServantMissions = true
 ```
