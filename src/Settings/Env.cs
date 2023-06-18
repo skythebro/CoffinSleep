@@ -9,8 +9,7 @@ public class ENV {
     public static ConfigEntry<bool> OnlyAllPlayersSleeping;
     public static ConfigEntry<bool> PauseDuringTransitions;
     public static ConfigEntry<bool> SleepBloodMoon;
-    public static ConfigEntry<bool> SpeedServantConversions;
-    public static ConfigEntry<bool> SpeedServantMissions;
+
 
     public class Server {
         private static string serverSection = "🔧Server";
@@ -25,8 +24,8 @@ public class ENV {
             IncreasedTime = Utils.Settings.Config.cfg.Bind(
                 serverSection,
                 nameof(IncreasedTime),
-                30,
-                "Change the increased game time in minutes per real time second"
+                1,
+                "Change the increased game time in hours per real time second"
             );
 
             OnlyDayTimeSleep = Utils.Settings.Config.cfg.Bind(
@@ -55,20 +54,6 @@ public class ENV {
                 nameof(SleepBloodMoon),
                 false,
                 "Enabled, will stop time speed during blood moon nights"
-            );
-
-            SpeedServantConversions = Utils.Settings.Config.cfg.Bind(
-                serverSection,
-                nameof(SpeedServantConversions),
-                true,
-                "Enabled, sleep speeds servant conversion progress"
-            );
-
-            SpeedServantMissions = Utils.Settings.Config.cfg.Bind(
-                serverSection,
-                nameof(SpeedServantMissions),
-                true,
-                "Enabled, sleep speeds servant mission progress"
             );
         }
     }

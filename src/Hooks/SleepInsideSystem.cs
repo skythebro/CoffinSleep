@@ -28,10 +28,7 @@ public class SleepInsideSystemPatch {
     public static class OnUpdate {
         private static void Prefix(SleepInsideSystem __instance) {
             try {
-                Systems.RotationCycle.IncreaseTime(
-                    (int modifier) => Systems.Convertion.IncreaseProgress(modifier),
-                    (int modifier) => Systems.Mission.IncreaseProgress(modifier)
-                );
+                Systems.RotationCycle.IncreaseTime();
             } catch (Exception e) { Log.Fatal(e); }
         }
     }

@@ -44,7 +44,7 @@ public static class RotationCycle {
             action(modifier); // run all increased time actions.
         }
 
-        SetTimeOfDayEvent.Add(minute: modifier); // increase the time in game minutes.
+        SetTimeOfDayEvent.Add(hour: modifier); // increase the time in game minutes.
     }
 
     private static void handleModifier(ref int modifier, ProjectM.DayNightCycle dnc) {
