@@ -1,16 +1,16 @@
 ﻿using BepInEx;
 using BepInEx.Configuration;
-using BepInEx.IL2CPP;
+using BepInEx.Unity.IL2CPP;
 using BepInEx.Logging;
 using HarmonyLib;
 using Utils.Logger;
-using Wetstone.API;
+using Bloodstone.API;
 
 namespace CoffinSleep;
 
-[BepInPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
-[BepInDependency("xyz.molenzwiebel.wetstone")]
-// [Wetstone.API.Reloadable]
+[BepInPlugin(MyPluginInfo.PLUGIN_GUID, MyPluginInfo.PLUGIN_NAME, MyPluginInfo.PLUGIN_VERSION)]
+[BepInDependency("gg.deca.Bloodstone")]
+// [Bloodstone.API.Reloadable]
 public class Plugin : BasePlugin {
     public override void Load() {
         if (VWorld.IsServer) Server.Load(this.Config, this.Log);
@@ -30,18 +30,18 @@ public static class Server {
     internal static void Load(ConfigFile config, ManualLogSource logger) {
         Settings.Config.Load(config, logger, "Server");
 
-        harmony = new Harmony(PluginInfo.PLUGIN_GUID);
+        harmony = new Harmony(MyPluginInfo.PLUGIN_GUID);
 
         Log.Trace("Patching harmony");
         harmony.PatchAll();
 
-        Log.Info($"Plugin {PluginInfo.PLUGIN_GUID} v{PluginInfo.PLUGIN_VERSION} server side is loaded!");
+        Log.Info($"Plugin {MyPluginInfo.PLUGIN_GUID} v{MyPluginInfo.PLUGIN_VERSION} server side is loaded!");
     }
 
     internal static bool Unload() {
         harmony.UnpatchSelf();
 
-        Log.Info($"Plugin {PluginInfo.PLUGIN_GUID} v{PluginInfo.PLUGIN_VERSION} server side is unloaded!");
+        Log.Info($"Plugin {MyPluginInfo.PLUGIN_GUID} v{MyPluginInfo.PLUGIN_VERSION} server side is unloaded!");
         return true;
     }
 }
@@ -51,18 +51,18 @@ internal static class Client {
     internal static void Load(ConfigFile config, ManualLogSource logger) {
         Settings.Config.Load(config, logger, "Client");
 
-        harmony = new Harmony(PluginInfo.PLUGIN_GUID);
+        harmony = new Harmony(MyPluginInfo.PLUGIN_GUID);
 
         Log.Trace("Patching harmony");
         harmony.PatchAll();
 
-        Log.Info($"Plugin {PluginInfo.PLUGIN_GUID} v{PluginInfo.PLUGIN_VERSION} client side is loaded!");
+        Log.Info($"Plugin {MyPluginInfo.PLUGIN_GUID} v{MyPluginInfo.PLUGIN_VERSION} client side is loaded!");
     }
 
     internal static bool Unload() {
         harmony.UnpatchSelf();
 
-        Log.Info($"Plugin {PluginInfo.PLUGIN_GUID} v{PluginInfo.PLUGIN_VERSION} client side is unloaded!");
+        Log.Info($"Plugin {MyPluginInfo.PLUGIN_GUID} v{MyPluginInfo.PLUGIN_VERSION} client side is unloaded!");
         return true;
     }
 }

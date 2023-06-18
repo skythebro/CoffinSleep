@@ -14,11 +14,11 @@ public class SleepInsideSystemPatch {
     public static class OnCreate {
         private static void Prefix(SleepInsideSystem __instance) {
             try {
-                if (Wetstone.API.VWorld.IsClient) {
-                    World.Set(Wetstone.API.VWorld.Client);
+                if (Bloodstone.API.VWorld.IsClient) {
+                    World.Set(Bloodstone.API.VWorld.Client);
                 }
-                if (Wetstone.API.VWorld.IsServer) {
-                    World.Set(Wetstone.API.VWorld.Server);
+                if (Bloodstone.API.VWorld.IsServer) {
+                    World.Set(Bloodstone.API.VWorld.Server);
                 }
             } catch (Exception e) { Log.Fatal(e); }
         }
