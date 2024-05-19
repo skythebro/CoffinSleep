@@ -1,6 +1,10 @@
 # CoffinSleep
-
+Forked from caioreix and updated to 1.0. All credit goes to caioreix for the original mod.
 Coffin Sleep is a VRising mod that speeds up time while you sleep in your coffin.
+
+Everything below here is from the original mod
+
+---
 
 Version 2.0 has less features because gloomrot makes some changes to the dlls, I will add again soon.
 

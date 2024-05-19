@@ -22,9 +22,9 @@
     <ItemGroup>
         <PackageReference Include="BepInEx.Unity.IL2CPP" Version="6.0.0-be.668" IncludeAssets="compile" />
         <PackageReference Include="BepInEx.Core" Version="6.0.0-be.668" IncludeAssets="compile" />
-        <PackageReference Include="BepInEx.PluginInfoProps" Version="2.*" />
-        <PackageReference Include="VRising.Bloodstone" Version="0.1.4" />
-        <PackageReference Include="VRising.Unhollowed.Client" Version="0.6.5.*" />
+        <PackageReference Include="BepInEx.PluginInfoProps" Version="2.1.0" />
+        <PackageReference Include="VRising.Bloodstone" Version="0.2.1" />
+        <PackageReference Include="VRising.Unhollowed.Client" Version="1.0.2.794360001" />
         <PackageReference Include="System.Text.Json" Version="7.0.0" />
     </ItemGroup>
 </Project>
