@@ -11,7 +11,7 @@ Version 2.0 has less features because gloomrot makes some changes to the dlls, I
 ## Instalation (Manual)
 
 * Install [BepInEx](https://docs.bepinex.dev/master/articles/user_guide/installation/index.html)
-* Extract [CoffinSleep.dll](https://github.com/caioreix/CoffinSleep/releases) into (VRising client folder)/BepInEx/plugins
+* Extract [CoffinSleep.dll](https://github.com/skythebro/CoffinSleep/releases) into (VRising client folder)/BepInEx/plugins
 * [ServerLaunchFix](https://v-rising.thunderstore.io/package/Mythic/ServerLaunchFix/) recommended for in-game hosted
   games
 * (Optional) If not using ServerLaunchFix, extract CoffinSleep.dll into (VRising server folder)/BepInEx/plugins
